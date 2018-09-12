@@ -22,6 +22,18 @@ import inception_score
 
 ROOT = "data"
 
+def batch_inception(numpy_arrays):
+    
+    '''
+    
+    numpy_arrays should be shape (N, C, W, H)
+    with (min, max) values of (0, 1).
+
+    '''
+    
+    data = (numpy_arrays-0.5)*2 # range [-1, 1]
+    return inception_score.get_inception_score(data) # returns (mean, standard deviation).
+    
 def get_cifar10(folder=None, download=False):
     if folder is None:
         download = int(download)
