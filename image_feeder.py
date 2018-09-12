@@ -11,7 +11,7 @@ def get_cifar10(folder=None, download=False):
     if folder is None:
         download = int(download)
         train = torchvision.datasets.CIFAR10(root=ROOT, train=True, download=download)
-        data = numpy.transpose(train.train_data, axes=[0, 3, 1, 2]).astype(numpy.float32)
+        data = train.train_data
         
     else:
         images = []
@@ -21,6 +21,7 @@ def get_cifar10(folder=None, download=False):
             images.append(im)
         data = numpy.array(images)
         
+    data = numpy.transpose(data, axes=[0, 3, 1, 2])
     data = data.astype(numpy.float32)
     data = (data/255.0-0.5)*2
     return data
