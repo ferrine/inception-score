@@ -42,7 +42,7 @@ def get_cifar10(folder=None, download=False):
     return data
 
 def compute_inception(folder, download):
-    data, labs = get_cifar10(folder, download)
+    data = get_cifar10(folder, download)
     output = inception_score.get_inception_score(data)
     print("Mean [std dev]: %s [%s]" % output)
 
