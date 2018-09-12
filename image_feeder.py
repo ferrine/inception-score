@@ -4,6 +4,8 @@ import torchvision.datasets
 
 import inception_score
 
+ROOT = "data"
+
 def get_cifar10():
     train = torchvision.datasets.CIFAR10(root=ROOT, train=True, download=True)
     return train.train_data, train.train_labels
