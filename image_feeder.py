@@ -1,3 +1,18 @@
+'''
+
+Accepted commands:
+
+    [1] To download and run it on CIFAR10 data
+    >> python3 image_feeder.py download=1
+    
+    [2] To run it on CIFAR10 data
+    >> python3 image_feeder.py
+    
+    [3] To run it on a folder of images
+    >> python3 image_feeder.py folder=PATH_TO_FOLDER_OF_IMAGES
+
+'''
+
 import numpy, os, tqdm
 
 import scipy.misc
