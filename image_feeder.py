@@ -9,7 +9,8 @@ ROOT = "data"
 def get_cifar10(download):
     download = int(download)
     train = torchvision.datasets.CIFAR10(root=ROOT, train=True, download=download)
-    data = numpy.transpose(train.train_data, axes=[0, 3, 1, 2])
+    data = numpy.transpose(train.train_data, axes=[0, 3, 1, 2]).astype(numpy.float32)
+    data = (data/255.0-0.5)*2 # scale between -1 and 1
     return data, train.train_labels
 
 def compute_inception(download):
