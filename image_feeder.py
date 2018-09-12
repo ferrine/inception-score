@@ -6,17 +6,29 @@ import inception_score
 
 ROOT = "data"
 
-def get_cifar10():
-    train = torchvision.datasets.CIFAR10(root=ROOT, train=True, download=True)
-    return train.train_data, train.train_labels
+def get_cifar10(download):
+    download = int(download)
+    train = torchvision.datasets.CIFAR10(root=ROOT, train=True, download=download)
+    data = numpy.transpose(train.train_data, axes=[0, 3, 1, 2])
+    return data, train.train_labels
 
-def compute_inception():
-    data, labs = get_cifar10()
+def compute_inception(download):
+    data, labs = get_cifar10(download)
     output = inception_score.get_inception_score(data)
     print("Mean [std dev]: %s [%s]" % output)
 
 def main():
-    compute_inception()
+    import sys
+    
+    DEFAULT = {
+        "download": 0
+    }
+    
+    args = [a.split("=") for a in sys.argv[1:]]
+    
+    DEFAULT.update(args)
+    
+    compute_inception(**DEFAULT)
 
 if __name__ == "__main__":
     main()
